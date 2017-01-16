@@ -38,7 +38,7 @@ class Excel():
             'documento': str,
             'pagamento': datetime,
             'codice_fiscale': str,
-            'importo': float,
+            'importo': (float, int),
             'protocollo': (str, type(None))
         }
         current_row = self._current_row[0].row
