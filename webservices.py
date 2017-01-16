@@ -54,7 +54,8 @@ def send_data(data):
         try:
             return (False, esito['listaMessaggi']['messaggio']['descrizione'])
         except TypeError:
-            return (False, '; '.join([messaggio['descrizione'] for messaggio in esito['listaMessaggi']['messaggio']]))
+            return (False, '; '.join([messaggio['descrizione']
+                                      for messaggio in esito['listaMessaggi']['messaggio']]))
 
 
 if __name__ == "__main__":
