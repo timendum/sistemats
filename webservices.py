@@ -40,6 +40,16 @@ BASE = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envel
    </soapenv:Body>
 </soapenv:Envelope>"""
 
+S_PROTOCOLLO = 'http://documentospesap730.sanita.finanze.it:protocollo'
+S_ENVELOPE = 'http://schemas.xmlsoap.org/soap/envelope/:Envelope'
+S_BODY = 'http://schemas.xmlsoap.org/soap/envelope/:Body'
+S_FAULT = 'http://schemas.xmlsoap.org/soap/envelope/:Fault'
+S_DSF = 'http://documentospesap730.sanita.finanze.it'
+S_RESPONSE = S_DSF +':inserimentoDocumentoSpesaResponse'
+S_DESCRIZIONE = S_DSF + ':descrizione'
+S_LISTAMESSAGGI = S_DSF + ':listaMessaggi'
+S_MESSAGGIO = S_DSF + ':messaggio'
+
 def send_data(data):
     body = BASE.format(**data)
     response = requests.post(ENDPOINT, data=body, headers=HEADERS, verify=False,
@@ -48,24 +58,25 @@ def send_data(data):
         if response.status_code == 500:
             esito = None
             try:
-                soap_response = xmltodict.parse(response.content)
-                esito = soap_response['env:Envelope']['env:Body']['env:Fault']['faultstring']
+                soap_response = xmltodict.parse(response.content, process_namespaces=True)
+                esito = soap_response[S_ENVELOPE][S_BODY][S_FAULT]['faultstring']
             except KeyError:
                 pass
             if esito:
                 raise ValueError('Errore durante la richiesta: %s' % esito)
             else:
                 raise ValueError('Errore durante la richiesta: %d' % response.status_code)
-    soap_response = xmltodict.parse(response.content)
-    esito = soap_response['soapenv:Envelope']['soapenv:Body']['inserimentoDocumentoSpesaResponse']
-    if esito.get('protocollo'):
-        return (True, esito['protocollo'])
+    soap_response = xmltodict.parse(response.content, process_namespaces=True)
+    esito = soap_response[S_ENVELOPE][S_BODY][S_RESPONSE]
+    if esito.get(S_PROTOCOLLO):
+        return (True, esito[S_PROTOCOLLO])
     else:
         try:
-            return (False, esito['listaMessaggi']['messaggio']['descrizione'])
+            return (False, esito[S_LISTAMESSAGGI][S_MESSAGGIO][S_DESCRIZIONE])
         except TypeError:
-            return (False, '; '.join([messaggio['descrizione']
-                                      for messaggio in esito['listaMessaggi']['messaggio']]))
+            return (False, '; '.join([messaggio[S_DESCRIZIONE]
+                                      for messaggio in esito[S_LISTAMESSAGGI][S_MESSAGGIO]])
+                   )
 
 
 if __name__ == "__main__":
