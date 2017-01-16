@@ -57,15 +57,15 @@ def moneyfmt(value, places=2, curr='', sep=',', dp='.',
 if __name__ == "__main__":
     def mapping(configurazione, riga, openssl):
         mapped = {
-            'username': configurazione['codice_fiscale'],
-            'password': configurazione['password'],
-            'pincode': openssl.encrypt(str(configurazione['pincode'])),
-            'cfProprietario': openssl.encrypt(configurazione['codice_fiscale']),
-            'pIva': str(configurazione['partita_iva']),
+            'username': configurazione['codice_fiscale'].strip(),
+            'password': configurazione['password'].strip(),
+            'pincode': openssl.encrypt(str(configurazione['pincode']).strip()),
+            'cfProprietario': openssl.encrypt(configurazione['codice_fiscale'].strip()),
+            'pIva': str(configurazione['partita_iva']).strip(),
             'dataEmissione': riga['emissione'].strftime('%Y-%m-%d'),
-            'numDocumento': str(riga['documento']),
+            'numDocumento': str(riga['documento']).strip(),
             'dataPagamento': riga['pagamento'].strftime('%Y-%m-%d'),
-            'cfCittadino': openssl.encrypt(riga['codice_fiscale']),
+            'cfCittadino': openssl.encrypt(riga['codice_fiscale'].strip()),
             'importo': moneyfmt(Decimal(riga['importo']), sep='')
         }
         return mapped
