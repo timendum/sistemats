@@ -45,7 +45,17 @@ def send_data(data):
     response = requests.post(ENDPOINT, data=body, headers=HEADERS, verify=False,
                              auth=(data['username'], data['password']))
     if response.status_code != 200:
-        raise ValueError('Errore durante la richiesta: %d' % response.status_code)
+        if response.status_code == 500:
+            esito = None
+            try:
+                soap_response = xmltodict.parse(response.content)
+                esito = soap_response['env:Envelope']['env:Body']['env:Fault']['faultstring']
+            except KeyError:
+                pass
+            if esito:
+                raise ValueError('Errore durante la richiesta: %s' % esito)
+            else:
+                raise ValueError('Errore durante la richiesta: %d' % response.status_code)
     soap_response = xmltodict.parse(response.content)
     esito = soap_response['soapenv:Envelope']['soapenv:Body']['inserimentoDocumentoSpesaResponse']
     if esito.get('protocollo'):
