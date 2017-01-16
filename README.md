@@ -17,7 +17,8 @@ sostenute dai cittadini
 
 2. Copiare `dati_template.xlsx` su `dati.xlsx`
 
-3. Inserire sul file Excel i propri dati nella tab _Dati personali_
+3. Inserire sul file Excel i propri dati nella tab _Dati personali_  
+    È importante che il file rimanga in formato "2007".
 
 4. Inserire nella tab _Spese_ tutte le informazioni necessarie
 
