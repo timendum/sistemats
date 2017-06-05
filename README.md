@@ -1,5 +1,5 @@
 # SistemaTS
-Inserimento spese sanitarie 730
+Inserimento spese sanitarie 730 - Prestazione sanitarie
 
 Gli script presenti in questo repository
 permettono di inserire sul `sistemats`
@@ -26,6 +26,16 @@ sostenute dai cittadini
 per puntare alla produzione
 
 6. Avviare `python main.py`
+
+## Tipologia di spesa
+
+Il programma invia il codice "tipo spesa" = SP (Prestazioni Sanitarie).
+
+È possibile
+, nell'attuale implementazione,
+inviare un solo tipo spesa alla volta.
+
+Il suo valore è specificato nel file `webservices.py`.
 
 ## Informazioni e limitiazioni
 
