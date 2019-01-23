@@ -24,7 +24,7 @@ class Excel():
         indexes = {}
         for cell in index_row:
             for key, value in excel_mapping.items():
-                if cell.value == value:
+                if cell.value.strip() == value:
                     indexes[key] = cell.column
                     break
         if len(indexes.keys()) != len(excel_mapping.keys()):
@@ -55,7 +55,7 @@ class Excel():
                             'Errore di tipo nella cella %s (%s vs %s)' %
                             (cell.coordinate, type(cell.value), excel_type[key])
                         )
-                    mapped[key] = cell.value
+                    mapped[key] = cell.value.strip()
                     break
         return mapped
 
@@ -77,7 +77,7 @@ class Excel():
         for row in sheet.rows:
             for key, value in excel_mapping.items():
                 if row[0].value == value:
-                    mapped[key] = row[1].value
+                    mapped[key] = row[1].value.strip()
                     break
         return mapped
 
