@@ -25,7 +25,7 @@ class Excel():
         for cell in index_row:
             for key, value in excel_mapping.items():
                 if cell.value.strip() == value:
-                    indexes[key] = cell.column
+                    indexes[key] = cell.column_letter
                     break
         if len(indexes.keys()) != len(excel_mapping.keys()):
             raise ValueError('Non ho trovato tutte le intestazioni')
@@ -49,13 +49,15 @@ class Excel():
         mapped = {}
         for cell in self._current_row:
             for key, value in self._indexes.items():
-                if cell.column == value:
+                if cell.column_letter == value:
                     if not isinstance(cell.value, excel_type[key]):
                         raise ValueError(
                             'Errore di tipo nella cella %s (%s vs %s)' %
                             (cell.coordinate, type(cell.value), excel_type[key])
                         )
-                    mapped[key] = cell.value.strip()
+                    mapped[key] = cell.value
+                    if isinstance(cell.value, str):
+                        mapped[key] = mapped[key].strip()
                     break
         return mapped
 
