@@ -1,9 +1,23 @@
 # pylint: disable=C0111
+import os
+
 import requests
 import xmltodict
 
-ENDPOINT = \
-    'https://invioSS730pTest.sanita.finanze.it/DocumentoSpesa730pWeb/DocumentoSpesa730pPort'
+PROD = os.getenv('TSPROD', False)
+
+if not PROD:
+    from requests.packages.urllib3.exceptions import InsecureRequestWarning
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+    ENDPOINT = \
+        'https://invioSS730pTest.sanita.finanze.it/DocumentoSpesa730pWeb/DocumentoSpesa730pPort'
+    VERIFY_SSL = False
+    print('** Invio in TEST')
+else:
+    VERIFY_SSL = True
+    ENDPOINT = \
+        'https://invioSS730p.sanita.finanze.it/DocumentoSpesa730pWeb/DocumentoSpesa730pPort'
+    print('*** Invio in PRODUZIONE! ***')
 
 HEADERS = {'content-type': 'text/xml',
            'SOAPAction': '"inserimento.documentospesap730.sanita.finanze.it"'}
@@ -52,7 +66,7 @@ S_MESSAGGIO = S_DSF + ':messaggio'
 
 def send_data(data):
     body = BASE.format(**data)
-    response = requests.post(ENDPOINT, data=body, headers=HEADERS, verify=False,
+    response = requests.post(ENDPOINT, data=body, headers=HEADERS, verify=VERIFY_SSL,
                              auth=(data['username'], data['password']))
     if response.status_code != 200:
         if response.status_code == 500:

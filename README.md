@@ -7,7 +7,7 @@ dell’Agenzia delle entrate
 le informazioni concernenti
 le spese sanitarie
 sostenute dai cittadini
-, ai fini della predisposizione della dichiarazione dei redditi precompilata 730.
+, ai fini della precompilazione della dichiarazione dei redditi precompilata 730.
 
 ## Istruzioni
 
@@ -22,10 +22,15 @@ sostenute dai cittadini
 
 4. Inserire nella tab _Spese_ tutte le informazioni necessarie
 
-5. Modificare l'indirizzo di ENDPOINT nel file `webservices.py`
-per puntare alla produzione
+5. Se si vuole inviare il produzione, impostare la variabile di ambiente `TSPROD`.
 
 6. Avviare `python main.py`
+
+### Nota
+
+Il programma elabora solo le righe
+la cui colonna _protocollo_ è vuota
+, saltando quindi le righe in cui l'invio è già stato effetuato.
 
 ## Tipologia di spesa
 
