@@ -24,6 +24,8 @@ class Excel():
         indexes = {}
         for cell in index_row:
             for key, value in excel_mapping.items():
+                if not cell.value:
+                    break
                 if cell.value.strip() == value:
                     indexes[key] = cell.column_letter
                     break
