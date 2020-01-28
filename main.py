@@ -66,7 +66,8 @@ if __name__ == "__main__":
             'numDocumento': str(riga['documento']).strip(),
             'dataPagamento': riga['pagamento'].strftime('%Y-%m-%d'),
             'cfCittadino': openssl.encrypt(riga['codice_fiscale'].strip()),
-            'importo': moneyfmt(Decimal(riga['importo']), sep='')
+            'importo': moneyfmt(Decimal(riga['importo']), sep=''),
+            'pagamentoTracciato': riga['pagamentoTracciato'].strip(),
         }
         return mapped
 

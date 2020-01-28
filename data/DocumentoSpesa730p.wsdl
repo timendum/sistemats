@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  	<wsdl:definitions targetNamespace="http://documentospesap730.sanita.finanze.it"   	  
+					  	   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+					  	   xmlns:tns="http://documentospesap730.sanita.finanze.it" 
+					  	   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+					  	   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  
+   <wsdl:types>
+		<xsd:schema elementFormDefault="qualified">
+			<xsd:import namespace="http://documentospesap730.sanita.finanze.it"  schemaLocation="DocumentoSpesa730pSchema.xsd"/>
+		</xsd:schema>		
+   </wsdl:types>	  
+  
+   <wsdl:message name="inserimentoDocumentoSpesaRequest">
+     <wsdl:part element="tns:inserimentoDocumentoSpesaRequest" name="inserimentoDocumentoSpesaRequest"/>
+   </wsdl:message>
+   <wsdl:message name="inserimentoDocumentoSpesaResponse">
+     <wsdl:part element="tns:inserimentoDocumentoSpesaResponse" name="inserimentoDocumentoSpesaResponse"/>
+   </wsdl:message>
+  
+   <wsdl:message name="variazioneDocumentoSpesaRequest">
+     <wsdl:part element="tns:variazioneDocumentoSpesaRequest" name="variazioneDocumentoSpesaRequest"/>
+   </wsdl:message>
+   <wsdl:message name="variazioneDocumentoSpesaResponse">
+     <wsdl:part element="tns:variazioneDocumentoSpesaResponse" name="variazioneDocumentoSpesaResponse"/>
+   </wsdl:message>
+  
+   <wsdl:message name="rimborsoDocumentoSpesaRequest">
+     <wsdl:part element="tns:rimborsoDocumentoSpesaRequest" name="rimborsoDocumentoSpesaRequest"/>
+   </wsdl:message>
+   <wsdl:message name="rimborsoDocumentoSpesaResponse">
+     <wsdl:part element="tns:rimborsoDocumentoSpesaResponse" name="rimborsoDocumentoSpesaResponse"/>
+   </wsdl:message>
+   
+   <wsdl:message name="cancellazioneDocumentoSpesaRequest">
+     <wsdl:part element="tns:cancellazioneDocumentoSpesaRequest" name="cancellazioneDocumentoSpesaRequest"/>
+   </wsdl:message>
+   <wsdl:message name="cancellazioneDocumentoSpesaResponse">
+     <wsdl:part element="tns:cancellazioneDocumentoSpesaResponse" name="cancellazioneDocumentoSpesaResponse"/>
+   </wsdl:message>
+   
+   <wsdl:portType name="DocumentoSpesa730pPort">
+    <wsdl:operation name="Inserimento">
+      <wsdl:input message="tns:inserimentoDocumentoSpesaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:inserimentoDocumentoSpesaResponse">
+    </wsdl:output>      
+    </wsdl:operation>
+    <wsdl:operation name="Variazione">
+      <wsdl:input message="tns:variazioneDocumentoSpesaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:variazioneDocumentoSpesaResponse">
+    </wsdl:output>      
+    </wsdl:operation>
+    <wsdl:operation name="Rimborso">
+      <wsdl:input message="tns:rimborsoDocumentoSpesaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:rimborsoDocumentoSpesaResponse">
+    </wsdl:output>      
+    </wsdl:operation>
+    <wsdl:operation name="Cancellazione">
+      <wsdl:input message="tns:cancellazioneDocumentoSpesaRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:cancellazioneDocumentoSpesaResponse">
+    </wsdl:output>      
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <wsdl:binding name="DocumentoSpesa730pServicePortBinding" type="tns:DocumentoSpesa730pPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Inserimento">
+      <soap:operation soapAction="inserimento.documentospesap730.sanita.finanze.it"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>     
+    </wsdl:operation>
+    <wsdl:operation name="Variazione">
+      <soap:operation soapAction="variazione.documentospesap730.sanita.finanze.it"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>     
+    </wsdl:operation>
+    <wsdl:operation name="Rimborso">
+      <soap:operation soapAction="rimborso.documentospesap730.sanita.finanze.it"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>     
+    </wsdl:operation>
+    <wsdl:operation name="Cancellazione">
+      <soap:operation soapAction="cancellazione.documentospesap730.sanita.finanze.it"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>     
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="DocumentoSpesa730pPort">
+    <wsdl:port name="DocumentoSpesa730pPort" binding="tns:DocumentoSpesa730pServicePortBinding">
+      <soap:address location="http://localhost:9080/DocumentoSpesa730pWeb/DocumentoSpesa730pPort"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

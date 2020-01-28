@@ -17,7 +17,8 @@ class Excel():
             'pagamento': 'dataPagamento',
             'codice_fiscale': 'codiceFiscaleCliente',
             'importo': 'importo',
-            'protocollo': 'protocollo'
+            'protocollo': 'protocollo',
+            'pagamentoTracciato': 'pagamentoTracciato'
         }
         sheet = self.workbook.get_sheet_by_name('Spese')
         index_row = sheet['1:1']
@@ -41,6 +42,7 @@ class Excel():
             'pagamento': datetime,
             'codice_fiscale': str,
             'importo': (float, int),
+            'pagamentoTracciato': str,
             'protocollo': (str, type(None))
         }
         current_row = self._current_row[0].row

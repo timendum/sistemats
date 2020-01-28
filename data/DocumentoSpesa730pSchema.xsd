@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" 
+             elementFormDefault="qualified" 
+                targetNamespace="http://documentospesap730.sanita.finanze.it" 
+                          xmlns="http://documentospesap730.sanita.finanze.it" 
+             xmlns:requestinvio="http://request.invio.documentospesap730.sanita.finanze.it"  
+                       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="inserimentoDocumentoSpesaRequest" type="inserimentoDocumentoSpesaRequest"/>
+	<xs:element name="inserimentoDocumentoSpesaResponse" type="inserimentoDocumentoSpesaResponse"/>
+
+	<xs:complexType name="inserimentoDocumentoSpesaRequest">
+		<xs:sequence>                
+			<xs:element name="opzionale1" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale2" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale3" type="xs:string" minOccurs="0"/>
+			<xs:element name="pincode" type="xs:string"/>     
+			<xs:element name="Proprietario" type="proprietario" minOccurs="0"/>
+			<xs:element name="idInserimentoDocumentoFiscale" type="documentoSpesa"/>   
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="inserimentoDocumentoSpesaResponse">
+		<xs:sequence>
+			<xs:element name="esitoChiamata" type="xs:string"/>      
+			<xs:element name="protocollo" type="xs:string" minOccurs="0"/>
+			<xs:element name="listaMessaggi">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="messaggio" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codice" type="xs:string"/>
+									<xs:element name="descrizione" type="xs:string"/>
+									<xs:element name="tipo" type="xs:string"/>
+								</xs:sequence> 
+							</xs:complexType>
+						</xs:element>                                 
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="variazioneDocumentoSpesaRequest" type="variazioneDocumentoSpesaRequest"/>
+	<xs:element name="variazioneDocumentoSpesaResponse" type="variazioneDocumentoSpesaResponse"/>
+
+	<xs:complexType name="variazioneDocumentoSpesaRequest">
+		<xs:sequence>                
+			<xs:element name="opzionale1" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale2" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale3" type="xs:string" minOccurs="0"/>
+			<xs:element name="pincode" type="xs:string"/>     
+			<xs:element name="Proprietario" type="proprietario" minOccurs="0"/> 
+			<xs:element name="idVariazioneDocumentoFiscale" type="documentoSpesa"/>   
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="variazioneDocumentoSpesaResponse">
+		<xs:sequence>
+			<xs:element name="esitoChiamata" type="xs:string"/>      
+			<xs:element name="protocollo" type="xs:string" minOccurs="0"/>
+			<xs:element name="listaMessaggi">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="messaggio" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codice" type="xs:string"/>
+									<xs:element name="descrizione" type="xs:string"/>
+									<xs:element name="tipo" type="xs:string"/>
+								</xs:sequence> 
+							</xs:complexType>
+						</xs:element>                                 
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="rimborsoDocumentoSpesaRequest" type="rimborsoDocumentoSpesaRequest"/>
+	<xs:element name="rimborsoDocumentoSpesaResponse" type="rimborsoDocumentoSpesaResponse"/>
+
+	<xs:complexType name="rimborsoDocumentoSpesaRequest">
+		<xs:sequence>                
+			<xs:element name="opzionale1" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale2" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale3" type="xs:string" minOccurs="0"/>
+			<xs:element name="pincode" type="xs:string"/>     
+			<xs:element name="Proprietario" type="proprietario" minOccurs="0"/>
+			<xs:element name="idRimborsoDocumentoFiscale" type="idDocumentoFiscale"/>
+			<xs:element name="DocumentoSpesa" type="documentoSpesa"/>   
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="rimborsoDocumentoSpesaResponse">
+		<xs:sequence>
+			<xs:element name="esitoChiamata" type="xs:string"/>      
+			<xs:element name="protocollo" type="xs:string" minOccurs="0"/>
+			<xs:element name="listaMessaggi">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="messaggio" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codice" type="xs:string"/>
+									<xs:element name="descrizione" type="xs:string"/>
+									<xs:element name="tipo" type="xs:string"/>
+								</xs:sequence> 
+							</xs:complexType>
+						</xs:element>                                 
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="cancellazioneDocumentoSpesaRequest" type="cancellazioneDocumentoSpesaRequest"/>
+	<xs:element name="cancellazioneDocumentoSpesaResponse" type="cancellazioneDocumentoSpesaResponse"/>
+
+	<xs:complexType name="cancellazioneDocumentoSpesaRequest">
+		<xs:sequence>                
+			<xs:element name="opzionale1" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale2" type="xs:string" minOccurs="0"/>
+			<xs:element name="opzionale3" type="xs:string" minOccurs="0"/>
+			<xs:element name="pincode" type="xs:string"/>     
+			<xs:element name="Proprietario" type="proprietario" minOccurs="0"/>
+			<xs:element name="idCancellazioneDocumentoFiscale" type="idDocumentoFiscale"/>      	    
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="cancellazioneDocumentoSpesaResponse">
+		<xs:sequence>
+			<xs:element name="esitoChiamata" type="xs:string"/>      
+			<xs:element name="protocollo" type="xs:string" minOccurs="0"/>
+			<xs:element name="listaMessaggi">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="messaggio" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="codice" type="xs:string"/>
+									<xs:element name="descrizione" type="xs:string"/>
+									<xs:element name="tipo" type="xs:string"/>
+								</xs:sequence> 
+							</xs:complexType>
+						</xs:element>                                 
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="proprietario">
+		<xs:sequence>
+			<xs:element name="codiceRegione" type="varChar3Type" minOccurs="0"/>
+			<xs:element name="codiceAsl" type="varChar3Type" minOccurs="0"/>
+			<xs:element name="codiceSSA" type="codSsaType" minOccurs="0"/>
+			<xs:element name="cfProprietario" type="cfType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="documentoSpesa">
+		<xs:sequence>
+			<xs:element name="idSpesa" type="idDocumentoFiscale"/>    
+			<xs:element name="dataPagamento" type="DataMinType"/>
+			<xs:element name="flagPagamentoAnticipato" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+			<xs:element name="cfCittadino" type="cfType"/>
+			<xs:element name="voceSpesa" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tipoSpesa">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="TK"/>
+									<xs:enumeration value="FC"/>
+									<xs:enumeration value="FV"/>
+									<xs:enumeration value="AS"/>
+									<xs:enumeration value="SR"/>
+									<xs:enumeration value="CT"/>
+									<xs:enumeration value="PI"/>
+									<xs:enumeration value="IC"/>
+									<xs:enumeration value="AA"/>
+									<xs:enumeration value="AD"/>
+									<xs:enumeration value="SV"/>
+									<xs:enumeration value="SP"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="flagTipoSpesa" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="importo" type="xs:double"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pagamentoTracciato" minOccurs="0"> 
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="SI"/> <!-- PAGAMENTO TRACCIATO -->					
+						<xs:enumeration value="NO"/> <!-- PAGAMENTO NON TRACCIATO -->
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="idDocumentoFiscale">
+		<xs:sequence>
+			<xs:element name="pIva">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:pattern value="([0-9]{11})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dataEmissione">
+				<xs:simpleType>
+					<xs:restriction base="DataMinType">
+						<xs:minInclusive value="2014-01-01"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numDocumentoFiscale">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dispositivo" type="Int3Type"/>
+						<xs:element name="numDocumento" type="numDocType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType> 
+
+	<xs:simpleType name="Int3Type">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DataMinType">
+		<xs:restriction base="xs:date">
+			<xs:minInclusive value="2013-01-01"/>
+			<xs:pattern value="([0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="cfType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="varChar3Type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([A-Z0-9]{3})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="codSsaType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([A-Z0-9]{5,6})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Dec7MinTipo">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="7"/>
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0.01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numDocType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([A-Za-z0-9_./\\\-]{1,20})"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
