@@ -1,4 +1,4 @@
-cryptography==2.7
+cryptography==2.9.2
 xmltodict==0.12
 requests==2.23.0
 openpyxl==3.0.3
