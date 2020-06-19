@@ -4,6 +4,7 @@ import os
 from requests import Session
 from requests.auth import HTTPBasicAuth
 from requests.exceptions import RequestException
+
 from zeep import Client
 from zeep.transports import Transport
 

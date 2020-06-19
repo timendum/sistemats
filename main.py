@@ -1,5 +1,6 @@
 # pylint: disable=C0111
 from decimal import Decimal
+
 from excel import Excel
 from openssl import OpenSSL
 from webservices import send_data
