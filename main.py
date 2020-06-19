@@ -77,7 +77,11 @@ if __name__ == "__main__":
         configurazione = excel.configurazione()
         try:
             while True:
-                riga = excel.nuova_riga()
+                try:
+                    riga = excel.nuova_riga()
+                except ValueError as e:
+                    print(e)
+                    continue
                 if not riga:
                     break
                 if riga.get('protocollo'):
