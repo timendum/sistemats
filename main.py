@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     def main():
         excel = Excel('dati.xlsx')
-        openssl = OpenSSL('SanitelCF.cer')
+        openssl = OpenSSL('data/SanitelCF.cer')
         configurazione = excel.configurazione()
         try:
             while True:
