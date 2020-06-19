@@ -4,7 +4,8 @@ from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import padding
 
-class OpenSSL():
+
+class OpenSSL:
     def __init__(self, certificate):
         self.key = OpenSSL.__load_cert_from_file(certificate)
         self.__cache = dict()
@@ -25,9 +26,11 @@ class OpenSSL():
             self.__cache[text] = result
         return self.__cache[text]
 
+
 if __name__ == "__main__":
+
     def main():
-        openssl = OpenSSL('SanitelCF.cer')
-        print(openssl.encrypt(b'prova'))
+        openssl = OpenSSL("SanitelCF.cer")
+        print(openssl.encrypt(b"prova"))
 
     main()
