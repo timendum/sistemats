@@ -1,5 +1,6 @@
 # pylint: disable=C0111
 from decimal import Decimal
+import sys
 
 from excel import Excel
 from openssl import OpenSSL
@@ -75,7 +76,10 @@ if __name__ == "__main__":
         return mapped
 
     def main():
-        excel = Excel("dati.xlsx")
+        filename = "dati.xlsx"
+        if len(sys.argv) > 1:
+            filename = sys.argv[0]
+        excel = Excel(filename)
         openssl = OpenSSL("data/SanitelCF.cer")
         configurazione = excel.configurazione()
         try:
