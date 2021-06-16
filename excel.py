@@ -14,15 +14,17 @@ class Excel:
 
     def __init_row(self):
         excel_mapping = {
-            "emissione": "dataEmissione",
-            "documento": "numDocumento",
-            "pagamento": "dataPagamento",
-            "codice_fiscale": "codiceFiscaleCliente",
-            "importo": "importo",
-            "protocollo": "protocollo",
-            "pagamentoTracciato": "pagamentoTracciato",
+            "emissione": "DATA",
+            "documento": "N FATTURA",
+            "pagamento": "DATA PAGAMENTO",
+            "codice_fiscale": "C.F.",
+            "importo": "NETTO PAGARE",
+            "protocollo": "PROTOCOLLO",
+            "pagamentoTracciato": "TRACCIATO",
+            "opposizione": "OPPOSIZIONE",
+            "bollo": "N. MARCA",
         }
-        sheet = self.workbook.get_sheet_by_name("Spese")
+        sheet = self.workbook.get_sheet_by_name("Fatture")
         index_row = sheet["1:1"]
         indexes = {}
         for cell in index_row:
@@ -45,7 +47,9 @@ class Excel:
             "codice_fiscale": str,
             "importo": (float, int),
             "pagamentoTracciato": str,
+            "opposizione": (str, type(None)),
             "protocollo": (str, type(None)),
+            "bollo": (str, type(None)),
         }
         current_row = self._current_row[0].row
         next_row = 1 + int(current_row)
@@ -78,13 +82,19 @@ class Excel:
             "password": "password",
             "partita_iva": "partitaIva",
             "pincode": "pincode",
+            "naturaPrestazione": "naturaPrestazione",
+            "naturaBollo": "naturaBollo",
+            "tipoSpesa": "tipoSpesa",
         }
-        sheet = self.workbook.get_sheet_by_name("Dati personali")
+        sheet = self.workbook.get_sheet_by_name("Sistema TS")
         mapped = {}
         for row in sheet.rows:
             for key, value in excel_mapping.items():
                 if row[0].value == value:
-                    mapped[key] = row[1].value.strip()
+                    if not isinstance(row[1], str):
+                        mapped[key] = str(row[1].value)
+                    else:
+                        mapped[key] = row[1].value.strip()
                     break
         return mapped
 
@@ -92,10 +102,24 @@ class Excel:
         self.workbook.save(self._filename)
 
 
+def check_file(filename) -> bool:
+    try:
+        with open(filename, "ba") as _:
+            pass
+    except PermissionError:
+        print("Chiudi Excel!")
+        return False
+    return True
+
+
 if __name__ == "__main__":
 
     def main():
-        excel = Excel("dati.xlsx")
+        import sys
+        filename = "dati.xlsx"
+        if sys.argv > 0:
+            filename = sys.argv[1]
+        excel = Excel(filename)
         print(excel.configurazione())
         while True:
             riga = excel.nuova_riga()

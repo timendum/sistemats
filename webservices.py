@@ -34,10 +34,29 @@ def send_data(data):
             "numDocumentoFiscale": {"dispositivo": "1", "numDocumento": data["numDocumento"]},
         },
         "dataPagamento": data["dataPagamento"],
-        "cfCittadino": data["cfCittadino"],
-        "voceSpesa": {"tipoSpesa": "SP", "importo": data["importo"]},
+        "voceSpesa": [
+            {
+                "tipoSpesa": data["tipoSpesa"],
+                "importo": data["importo"],
+                "naturaIVA": data["naturaPrestazione"],
+            }
+        ],
         "pagamentoTracciato": data["pagamentoTracciato"],
+        "tipoDocumento": "F",
+        "flagOpposizione": data["flagOpposizione"],
     }
+    if "flagPagamentoAnticipato" in data:
+        documentoSpesa["flagPagamentoAnticipato"] = data["flagPagamentoAnticipato"]
+    if "cfCittadino" in data:
+        documentoSpesa["cfCittadino"] = data["cfCittadino"]
+    if "bollo" in data:
+        documentoSpesa["voceSpesa"].append(
+            {
+                "tipoSpesa": data["tipoSpesa"],
+                "importo": data["bollo"],
+                "naturaIVA": data["naturaBollo"],
+            }
+        )
     session = Session()
     session.verify = VERIFY_SSL
     session.auth = HTTPBasicAuth(data["username"], data["password"])

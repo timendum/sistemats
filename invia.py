@@ -7,6 +7,8 @@ from openssl import OpenSSL
 from webservices import send_data
 
 
+IMPORTO_BOLLO = 2
+
 def moneyfmt(value, places=2, curr="", sep=",", dp=".", pos="", neg="-", trailneg=""):
     """Convert Decimal to a money formatted string.
 
@@ -71,12 +73,24 @@ if __name__ == "__main__":
             "dataPagamento": riga["pagamento"].strftime("%Y-%m-%d"),
             "cfCittadino": openssl.encrypt(riga["codice_fiscale"].strip()),
             "importo": moneyfmt(Decimal(riga["importo"]), sep=""),
+            "naturaPrestazione": configurazione["naturaPrestazione"].strip(),
+            "naturaBollo": configurazione["naturaBollo"].strip(),
             "pagamentoTracciato": riga["pagamentoTracciato"].strip(),
+            "flagOpposizione": "0",
+            "tipoSpesa": configurazione["tipoSpesa"].strip(),
         }
+        if mapped["dataPagamento"] < mapped["dataEmissione"]:
+            mapped["flagPagamentoAnticipato"] = 1
+        if riga["bollo"] and riga["bollo"].strip():
+            mapped["importo"] = moneyfmt(Decimal(riga["importo"]) - IMPORTO_BOLLO, sep="")
+            mapped["bollo"] = moneyfmt(Decimal(IMPORTO_BOLLO), sep="")
+        if riga["opposizione"] and "si" == riga["opposizione"].lower():
+            mapped["flagOpposizione"] = "1"
+            del mapped["cfProprietario"]
         return mapped
 
     def main():
-        filename = "dati.xlsx"
+        filename = "fatture.xlsx"
         if len(sys.argv) > 1:
             filename = sys.argv[0]
         excel = Excel(filename)
