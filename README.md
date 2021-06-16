@@ -17,10 +17,10 @@ sostenute dai cittadini
 
 2. Copiare `dati_template.xlsx` su `dati.xlsx`
 
-3. Inserire sul file Excel i propri dati nella tab _Dati personali_  
+3. Inserire sul file Excel i propri dati nella tab _Sistema TS_  
     È importante che il file rimanga in formato "2007".
 
-4. Inserire nella tab _Spese_ tutte le informazioni necessarie
+4. Inserire nella tab _Fatture_ tutte le informazioni necessarie
 
 5. Se si vuole inviare il produzione, impostare la variabile di ambiente `TSPROD`.
 
@@ -32,15 +32,21 @@ Il programma elabora solo le righe
 la cui colonna _protocollo_ è vuota
 , saltando quindi le righe in cui l'invio è già stato effetuato.
 
-## Tipologia di spesa
+## Configurazioni
 
-Il programma invia il codice "tipo spesa" = SP (Prestazioni Sanitarie).
+Nel foglio _Sistema TS_ è possibile configurare:
 
-È possibile
-, nell'attuale implementazione,
-inviare un solo tipo spesa alla volta.
+- il tipo di spesa inviato (_tipoSpesa_)
+- la natura dell'esenzione IVA della prestazione (_naturaPrestazione_)
+- la natura dell'esenzione IVA del bollo (_naturaBollo_)
 
-Il suo valore è specificato nel file `webservices.py`.
+## Bollo
+
+Se nella riga è valorizzata la colonna _N. MARCA_
+allora verranno inviate al due voci nella stessa fattura:
+
+1. L'importo _NETTO PAGARE_ meno 2€
+1. Una seconda riga da 2€ per il bollo
 
 ## Informazioni e limitiazioni
 
