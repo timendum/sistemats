@@ -9,6 +9,7 @@ from webservices import send_data
 
 IMPORTO_BOLLO = 2
 
+
 def moneyfmt(value, places=2, curr="", sep=",", dp=".", pos="", neg="-", trailneg=""):
     """Convert Decimal to a money formatted string.
 
@@ -59,6 +60,16 @@ def moneyfmt(value, places=2, curr="", sep=",", dp=".", pos="", neg="-", trailne
     return "".join(reversed(result))
 
 
+def check_file(filename) -> bool:
+    try:
+        with open(filename, "ba") as _:
+            pass
+    except PermissionError:
+        print("Chiudi Excel!")
+        return False
+    return True
+
+
 if __name__ == "__main__":
 
     def mapping(configurazione, riga, openssl):
@@ -75,7 +86,7 @@ if __name__ == "__main__":
             "importo": moneyfmt(Decimal(riga["importo"]), sep=""),
             "naturaPrestazione": configurazione["naturaPrestazione"].strip(),
             "naturaBollo": configurazione["naturaBollo"].strip(),
-            "pagamentoTracciato": riga["pagamentoTracciato"].strip(),
+            "pagamentoTracciato": riga["pagamentoTracciato"].strip().upper(),
             "flagOpposizione": "0",
             "tipoSpesa": configurazione["tipoSpesa"].strip(),
         }
@@ -92,7 +103,9 @@ if __name__ == "__main__":
     def main():
         filename = "fatture.xlsx"
         if len(sys.argv) > 1:
-            filename = sys.argv[0]
+            filename = sys.argv[1]
+        if not check_file(filename):
+            return
         excel = Excel(filename)
         openssl = OpenSSL("data/SanitelCF.cer")
         configurazione = excel.configurazione()
