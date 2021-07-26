@@ -61,9 +61,12 @@ class Excel:
             for key, value in self._indexes.items():
                 if cell.column_letter == value:
                     if not isinstance(cell.value, excel_type[key]):
+                        if cell.value is None:
+                            raise ValueError(
+                                "Errore nella cella %s: %s non compilato" % (cell.coordinate, key)
+                            )
                         raise ValueError(
-                            "Errore di tipo nella cella %s (%s vs %s)"
-                            % (cell.coordinate, type(cell.value), excel_type[key])
+                            "Errore nella cella %s, %s non valido" % (cell.coordinate, key)
                         )
                     mapped[key] = cell.value
                     if isinstance(cell.value, str):
@@ -116,6 +119,7 @@ if __name__ == "__main__":
 
     def main():
         import sys
+
         filename = "dati.xlsx"
         if sys.argv > 0:
             filename = sys.argv[1]
