@@ -1,5 +1,5 @@
 cryptography>=3.4.6,<3.5
 requests==2.25.1
-openpyxl==3.0.7
+openpyxl==3.0.8
 zeep==4.0.0
 cx-Freeze==6.5.3
